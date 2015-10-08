@@ -1,0 +1,3 @@
+#include "calculadora.h"
+
+//funcoes...
