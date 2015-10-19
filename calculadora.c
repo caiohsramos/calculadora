@@ -1,3 +1,80 @@
 #include "calculadora.h"
 
-//funcoes...
+struct pilha {
+	NO *topo;
+	int tamanho;
+};
+
+struct no {
+	int item; // aqui pensei em usar void para guardar qualquer coisa, ai a gente pode guardar tudo, parenteses etc na mesma variavel.
+	struct no *anterior;
+};
+
+PILHA *criaPilha() {
+	
+	PILHA *pilha = (PILHA *) malloc(sizeof(PILHA));
+	
+	if(pilha != NULL) {
+		pilha->topo = NULL;
+		pilha->tamanho = 0;
+	}
+	
+	return pilha;
+}
+/*
+	entao, coloquei int aqui so por questao de teste, mas pensei em colocarmos void * e ir tratando os casos, o que voce acha?, ou acha melhor botar unsigned char mesmo e tratar so os inteiros?
+
+	deixa comentado algo depois so pra mim saber se voce viu isso porque nao sei se to fazendo certo la no git hahaha.*/
+int empilhar(PILHA *pilha, int item) {
+	
+	NO *novoNo = (NO *) malloc(sizeof(NO));
+
+	if(novoNo != NULL) {
+		//como eu disse la, eh so um esboco, depois a gente trata os casos e faz os casts caso usemos void mesmo.
+		novoNo->item = item;
+		novoNo->anterior = pilha->topo;
+		pilha->topo = novoNo;
+		pilha->tamanho++;
+		return TRUE;
+	};
+	return FALSE;
+}
+/*coloquei void * porque acho que vamos usar o item que desempilhar, certo? conforme vai desempilhando vai fazendo as operacoes da calculadora acho*/
+int desempilhar(PILHA *pilha) {
+
+	NO *noAux = NULL;
+	int item = NULL;
+
+
+	if(!vazia(pilha)) {
+		item = pilha->topo->item;
+		noAux = pilha->topo;
+		pilha->topo = pilha->topo->anterior;
+	//fazendo isso eu nao to setando null tambem pro pilha->topo->anterior?		
+	//->>>>	noAux->anterior = NULL;
+		free(noAux);
+		noAux = NULL;
+		
+		return item;
+	}
+	return FALSE;
+
+}
+
+int vazia(PILHA *pilha) {
+	return(pilha->topo == NULL);
+}
+/*aqui so fiz pra testar o conteudo da pilha pra ver se deu tudo certo*/
+void imprimePilha(PILHA *pilha) {
+	
+	NO *noAux = pilha->topo;
+
+	while(noAux != NULL) {
+		printf("%d\t", noAux->item);
+		noAux = noAux->anterior;
+	}
+}
+
+
+
+

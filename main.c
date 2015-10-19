@@ -1,7 +1,23 @@
 #include "calculadora.h"
 
 int main(int argc, char *argv[]) {
+
+	PILHA *pilha = criaPilha();
 	
+	empilhar(pilha, 17);
+	empilhar(pilha, 24);
+	empilhar(pilha, 32);
+	empilhar(pilha, 7);
+	
+	imprimePilha(pilha);
+
+	desempilhar(pilha);
+	imprimePilha(pilha);
+
+	desempilhar(pilha);
+	imprimePilha(pilha);
+		
+
 	/*Entao, quando abri o projeto tambem ja vi que era a notacao polonesa, meio adaptada por causa dos parenteses mas vi que era ela haha,
 	mas tambem acredito que a melhor alternativa seja uma pilha, inclusive se eu nao me engano eu tenho pronto um programa ja com calculadora
 	em notacao polonesa reversa, posso te enviar pra voce dar uma olhada, eh ate feito com pilha porque meu amigo teve esse trabalho e pra ajudar
