@@ -1,13 +1,19 @@
 #include "calculadora.h"
 
-struct pilha {
+struct pilha_ {
 	NO *topo;
 	int tamanho;
 };
 
-struct no {
-	int item; // aqui pensei em usar void para guardar qualquer coisa, ai a gente pode guardar tudo, parenteses etc na mesma variavel.
-	struct no *anterior;
+struct item_ {
+	int tipo; //pode ser 1 = num, 0 = operacao (, ), /, +, -, *
+	float num;
+	char op;
+};
+
+struct no_ {
+	ITEM item; // aqui pensei em usar void para guardar qualquer coisa, ai a gente pode guardar tudo, parenteses etc na mesma variavel.
+	struct no_ *anterior;
 };
 
 PILHA *criaPilha() {
@@ -25,7 +31,7 @@ PILHA *criaPilha() {
 	entao, coloquei int aqui so por questao de teste, mas pensei em colocarmos void * e ir tratando os casos, o que voce acha?, ou acha melhor botar unsigned char mesmo e tratar so os inteiros?
 
 	deixa comentado algo depois so pra mim saber se voce viu isso porque nao sei se to fazendo certo la no git hahaha.*/
-int empilhar(PILHA *pilha, int item) {
+int empilhar(PILHA *pilha, ITEM item) {
 	
 	NO *novoNo = (NO *) malloc(sizeof(NO));
 
@@ -40,14 +46,13 @@ int empilhar(PILHA *pilha, int item) {
 	return FALSE;
 }
 /*coloquei void * porque acho que vamos usar o item que desempilhar, certo? conforme vai desempilhando vai fazendo as operacoes da calculadora acho*/
-int desempilhar(PILHA *pilha) {
+int desempilhar(PILHA *pilha, ITEM *item) {
 
 	NO *noAux = NULL;
-	int item = NULL;
 
 
 	if(!vazia(pilha)) {
-		item = pilha->topo->item;
+		(*item) = pilha->topo->item;
 		noAux = pilha->topo;
 		pilha->topo = pilha->topo->anterior;
 	//fazendo isso eu nao to setando null tambem pro pilha->topo->anterior?		
@@ -55,7 +60,7 @@ int desempilhar(PILHA *pilha) {
 		free(noAux);
 		noAux = NULL;
 		
-		return item;
+		return TRUE;
 	}
 	return FALSE;
 
@@ -64,7 +69,7 @@ int desempilhar(PILHA *pilha) {
 int vazia(PILHA *pilha) {
 	return(pilha->topo == NULL);
 }
-/*aqui so fiz pra testar o conteudo da pilha pra ver se deu tudo certo*/
+/*aqui so fiz pra testar o conteudo da pilha pra ver se deu tudo certo
 void imprimePilha(PILHA *pilha) {
 	
 	NO *noAux = pilha->topo;
@@ -74,7 +79,16 @@ void imprimePilha(PILHA *pilha) {
 		noAux = noAux->anterior;
 	}
 }
+*/
 
 
-
+float calculaResultado(char *expressao) {
+	//essa funcao deve transformar a expressao infixa para posfixa, e calcular o resultado...
+	int tam = (strlen(expressao)-1);
+	ITEM item;
+	float res;
+	PILHA *pilha = criaPilha();
+	//...
+	return res;
+}
 

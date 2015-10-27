@@ -8,15 +8,16 @@
 #define FALSE 0
 #define TRUE 1
 
-typedef struct pilha PILHA;
-typedef struct no NO;
+typedef struct pilha_ PILHA;
+typedef struct no_ NO;
+typedef struct item_ ITEM;
 
 PILHA *criaPilha();
-int empilhar(PILHA *, int);
-int desempilhar(PILHA *);
+int empilhar(PILHA *, ITEM);
+int desempilhar(PILHA *, ITEM *);
 int vazia(PILHA *);
 void imprimePilha(PILHA *);
-
+float calculaResultado(char *expressao);
 
 //cabecalhos...
 

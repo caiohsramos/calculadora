@@ -1,22 +1,21 @@
 #include "calculadora.h"
 
 int main(int argc, char *argv[]) {
-
-	PILHA *pilha = criaPilha();
+	char *expressao = NULL, val;
+	int tam;
+	float res;
+	expressao = (char*)malloc(sizeof(char)*30);
 	
-	empilhar(pilha, 17);
-	empilhar(pilha, 24);
-	empilhar(pilha, 32);
-	empilhar(pilha, 7);
-	
-	imprimePilha(pilha);
-
-	desempilhar(pilha);
-	imprimePilha(pilha);
-
-	desempilhar(pilha);
-	imprimePilha(pilha);
-		
+	do {
+		expressao = (char*)malloc(sizeof(char)*30);
+		scanf("%s", expressao);
+		tam = strlen(expressao);
+		val = expressao[tam-1];
+		res = calculaResultado(expressao);
+		if(res == 37000.45) printf("Expressao incorreta.\n");
+		else printf("%.2f\n", res);
+		free(expressao);
+	} while(val != '.');
 
 	/*Entao, quando abri o projeto tambem ja vi que era a notacao polonesa, meio adaptada por causa dos parenteses mas vi que era ela haha,
 	mas tambem acredito que a melhor alternativa seja uma pilha, inclusive se eu nao me engano eu tenho pronto um programa ja com calculadora
@@ -29,6 +28,5 @@ int main(int argc, char *argv[]) {
 	 * 	inteira da conta e converter para "polonesa reversa". Desse
 	 * 	jeito, poderiamos usar o TAD Pilha para dar o resultado final
 	 */
-	
 	return 0;
 }
