@@ -6,7 +6,10 @@ struct pilha_ {
 };
 
 struct item_ {
-	int tipo; //pode ser 1 = num, 0 = operacao (, ), /, +, -, *
+	//int tipo; |Acho que esse 'tipo' nao sera necessario,
+	//			|pois empilharemos simbolos (char) ou numeros (float), nao os
+	//			|dois ao mesmo tempo. Simbolos na hora da transformacao e numeros
+	//			|na hora do calculo.
 	float num;
 	char op;
 };
