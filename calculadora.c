@@ -111,18 +111,51 @@ char *transforma_pos_fixa(char *expressao) {
 		if(vazia(pilha)) {
 			item.op = val;
 			empilhar(pilha, item);
+		} else {
+			topo(pilha, &item);
+			if(item.op == '(') {
+				item.op = val;
+				empilhar(pilha, item);
+			} else if(val == '(') {
+				item.op = val;
+				empilhar(pilha, item);
+			} else if(val == ')') {
+				do {
+					desempilhar(pilha, &item);
+					if(item.op != '(') pos_fixa[j] = item.op; j++;
+				} while(item.op != '(');
+			} else {
+				topo(pilha, &item);
+				if(val == '*' || val == '/') {
+						if(item.op == '+' || item.op == '-') {
+							item.op = val;
+							empilhar(pilha, item);
+						} else {
+							desempilhar(pilha, &item);
+							pos_fixa[j] = item.op;
+							j++;
+							item.op = val;
+							empilhar(pilha, item);
+						}
+				} else {
+					topo(pilha, &item);
+					if(val == '+' || val == '-') {
+						if(item.op == '*' || item.op == '/') {
+							//passo 7....
+						} else {
+							desempilhar(pilha, &item);
+							pos_fixa[j] = item.op;
+							j++;
+							item.op = val;
+							empilhar(pilha, item);
+						}
+					}
+				}
+			}
 		}
-		topo(pilha, &item);
-		if(item.op == '(') {
-			item.op = val;
-			empilhar(pilha, item);
-		} 
-		if(val == '(') {
-			item.op = val;
-			empilhar(pilha, item);
-		}
-		if(val == ')'); //continuar........
-		//estou fazendo os casos na ordem que aparece no final do site que eu te mandei...
 	}
+	//estou fazendo os casos na ordem que aparece no final do site que eu te mandei...
+	
+	//passo 8 entra aqui......
 	return pos_fixa;
 }
