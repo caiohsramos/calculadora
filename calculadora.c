@@ -84,14 +84,45 @@ void imprimePilha(PILHA *pilha) {
 }
 */
 
+void topo(PILHA *p, ITEM *item) {
+	(*item) = p->topo->item;
+}
 
 float calculaResultado(char *expressao) {
 	//essa funcao deve transformar a expressao infixa para posfixa, e calcular o resultado...
-	int tam = (strlen(expressao)-1);
-	ITEM item;
+	char *pos_fixa = transforma_pos_fixa(expressao);
 	float res;
-	PILHA *pilha = criaPilha();
-	//...
+	//res= calcula_pos_fixa(pos_fixa);
+	free(pos_fixa);
 	return res;
 }
 
+char *transforma_pos_fixa(char *expressao) {
+	char *pos_fixa = (char*)malloc(50*sizeof(char));
+	char val;
+	int tam = (strlen(expressao)-1), i, j;
+	PILHA *pilha = criaPilha();
+	ITEM item;
+	j = 0;
+	for(i = 0; i < tam; i++) {
+		val = expressao[i];
+		if(isdigit(val) || val == '.') pos_fixa[j] = val; j++;
+		if(val == ' ' || val == '\t') pos_fixa[j] = val; j++;
+		if(vazia(pilha)) {
+			item.op = val;
+			empilhar(pilha, item);
+		}
+		topo(pilha, &item);
+		if(item.op == '(') {
+			item.op = val;
+			empilhar(pilha, item);
+		} 
+		if(val == '(') {
+			item.op = val;
+			empilhar(pilha, item);
+		}
+		if(val == ')'); //continuar........
+		//estou fazendo os casos na ordem que aparece no final do site que eu te mandei...
+	}
+	return pos_fixa;
+}

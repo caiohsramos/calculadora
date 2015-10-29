@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define FALSE 0
 #define TRUE 1
@@ -17,7 +18,10 @@ int empilhar(PILHA *, ITEM);
 int desempilhar(PILHA *, ITEM *);
 int vazia(PILHA *);
 void imprimePilha(PILHA *);
-float calculaResultado(char *expressao);
+float calculaResultado(char *);
+char *transforma_pos_fixa(char *);
+void topo(PILHA *, ITEM *);
+//float calcula_pos_fixa(char *);
 
 //cabecalhos...
 
