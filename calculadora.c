@@ -84,17 +84,26 @@ void imprimePilha(PILHA *pilha) {
 }
 */
 
+
+void apaga_pilha(PILHA **p) {
+	ITEM aux;
+	while(!vazia((*p))) desempilhar((*p), &aux);
+	free(*p);
+}
+
 void topo(PILHA *p, ITEM *item) {
 	(*item) = p->topo->item;
 }
 
 float calculaResultado(char *expressao) {
 	//essa funcao deve transformar a expressao infixa para posfixa, e calcular o resultado...
+	printf("Infixa = %s\n", expressao);
 	char *pos_fixa = transforma_pos_fixa(expressao);
 	float res;
 	//res= calcula_pos_fixa(pos_fixa);
+	printf("Pos_fixa = %s\n", pos_fixa);
 	free(pos_fixa);
-	return res;
+	return 0.0;
 }
 
 char *transforma_pos_fixa(char *expressao) {
@@ -106,9 +115,13 @@ char *transforma_pos_fixa(char *expressao) {
 	j = 0;
 	for(i = 0; i < tam; i++) {
 		val = expressao[i];
-		if(isdigit(val) || val == '.') pos_fixa[j] = val; j++;
-		if(val == ' ' || val == '\t') pos_fixa[j] = val; j++;
-		if(vazia(pilha)) {
+		if(isdigit(val) || val == '.') {
+			pos_fixa[j] = val;
+			j++;
+		} else if(val == ' ' || val == '\t') {
+			pos_fixa[j] = val;
+			j++;
+		} else if(vazia(pilha)) {
 			item.op = val;
 			empilhar(pilha, item);
 		} else {
@@ -122,7 +135,10 @@ char *transforma_pos_fixa(char *expressao) {
 			} else if(val == ')') {
 				do {
 					desempilhar(pilha, &item);
-					if(item.op != '(') pos_fixa[j] = item.op; j++;
+					if(item.op != '(') {
+						pos_fixa[j] = item.op;
+						j++;
+					}
 				} while(item.op != '(');
 			} else {
 				topo(pilha, &item);
@@ -141,7 +157,16 @@ char *transforma_pos_fixa(char *expressao) {
 					topo(pilha, &item);
 					if(val == '+' || val == '-') {
 						if(item.op == '*' || item.op == '/') {
-							//passo 7....
+							//passo 7...
+							while(item.op == '*' || item.op == '/') {
+								desempilhar(pilha, &item);
+								pos_fixa[j] = item.op;
+								j++;
+								if(!vazia(pilha)) topo(pilha, &item);
+								else break;
+							}
+							item.op = val;
+							empilhar(pilha, item);
 						} else {
 							desempilhar(pilha, &item);
 							pos_fixa[j] = item.op;
@@ -157,5 +182,12 @@ char *transforma_pos_fixa(char *expressao) {
 	//estou fazendo os casos na ordem que aparece no final do site que eu te mandei...
 	
 	//passo 8 entra aqui......
+	while(!vazia(pilha)) {
+		desempilhar(pilha, &item);
+		pos_fixa[j] = item.op;
+		j++;
+	}
+	pos_fixa[j] = '\0';
+	apaga_pilha(&pilha);
 	return pos_fixa;
 }

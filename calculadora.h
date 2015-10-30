@@ -22,7 +22,6 @@ float calculaResultado(char *);
 char *transforma_pos_fixa(char *);
 void topo(PILHA *, ITEM *);
 //float calcula_pos_fixa(char *);
-
-//cabecalhos...
+void apaga_pilha(PILHA **);
 
 #endif

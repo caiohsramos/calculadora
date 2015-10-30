@@ -4,16 +4,16 @@ int main(int argc, char *argv[]) {
 	char *expressao = NULL, val;
 	int tam;
 	float res;
-	expressao = (char*)malloc(sizeof(char)*30);
 	
 	do {
 		expressao = (char*)malloc(sizeof(char)*30);
-		scanf("%s", expressao);
+		scanf("%[^\n]s", expressao);
+		getchar();
 		tam = strlen(expressao);
 		val = expressao[tam-1];
 		res = calculaResultado(expressao);
 		if(res == 37000.45) printf("Expressao incorreta.\n");
-		else printf("%.2f\n", res);
+		else printf("Resultado = %.2f\n", res);
 		free(expressao);
 	} while(val != '.');
 
