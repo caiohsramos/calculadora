@@ -78,8 +78,6 @@ float calculaResultado(char *expressao) {
 	char *pos_fixa = transforma_pos_fixa(expressao);
 	float res;
 	if(testeInvalida(expressao)) return ERRO;
-	printf("Infixa: %s\n", expressao);
-	printf("Pos_fixa: %s\n", pos_fixa);
 	res = calcula_pos_fixa(pos_fixa);
 	free(pos_fixa);
 	return res;
@@ -190,7 +188,6 @@ float calcula_pos_fixa(char *exp) {
 		while(exp[i] == ' ' || exp[i] == '\t') i++;
 		while(retornaOperacao(exp[i]) == 0) {
 			sscanf(&exp[i], "%f", &a);
-			printf("Float lido: %.2f\n", a);
 			item.num = a;
 			empilhar(pilha, item);
 			while(exp[i] == ' ' || exp[i] == '\t') i++;
@@ -223,7 +220,6 @@ float calcula_pos_fixa(char *exp) {
 		};
 		empilhar(pilha, item);
 		topo(pilha, &item);
-		printf("Topo: %.2f\n", item.num);
 	}
 	desempilhar(pilha, &item);
 	apaga_pilha(&pilha);
