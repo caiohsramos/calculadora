@@ -100,7 +100,7 @@ float calculaResultado(char *expressao) {
 	printf("Infixa = %s\n", expressao);
 	char *pos_fixa = transforma_pos_fixa(expressao);
 	float res;
-	//res= calcula_pos_fixa(pos_fixa);
+	//res = calculaResultado(pos_fixa);
 	printf("Pos_fixa = %s\n", pos_fixa);
 	free(pos_fixa);
 	return 0.0;
@@ -191,3 +191,38 @@ char *transforma_pos_fixa(char *expressao) {
 	apaga_pilha(&pilha);
 	return pos_fixa;
 }
+
+char retornaOperacao(char op) {
+	if(op == '*') return 1;
+	if(op == '/') return 2;
+	if(op == '+') return 3;
+	if(op == '-') return 4;
+	return 0;
+}
+
+int calculaRes(char *exp) {
+	
+	PILHA *pilha = criaPilha();
+	int i;
+	float a, b;
+
+	for(i = 0; i < strlen(exp); i++) {
+		while(exp[i] > 0 && exp[i] < 9) {
+			// aqui empilha-se os numeros ateh que se reconheca alguma operacao
+			empilhar(pilha, atoi(&(exp[i])));
+			i++;
+			/*
+				depois..
+				a = desempilhar;
+				b = desempilhar;
+				res = a op b;	
+				empilhar res;
+			*/
+		} 
+	}
+	
+
+}
+
+
+

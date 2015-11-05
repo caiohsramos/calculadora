@@ -21,6 +21,7 @@ void imprimePilha(PILHA *);
 float calculaResultado(char *);
 char *transforma_pos_fixa(char *);
 void topo(PILHA *, ITEM *);
+char retornaOperacao(char op);
 //float calcula_pos_fixa(char *);
 void apaga_pilha(PILHA **);
 
