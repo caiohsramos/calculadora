@@ -75,10 +75,10 @@ void topo(PILHA *p, ITEM *item) {
 }
 
 float calculaResultado(char *expressao) {
-	if(testeInvalida(expressao)) return ERRO;
-	printf("Infixa: %s\n", expressao);
 	char *pos_fixa = transforma_pos_fixa(expressao);
 	float res;
+	if(testeInvalida(expressao)) return ERRO;
+	printf("Infixa: %s\n", expressao);
 	printf("Pos_fixa: %s\n", pos_fixa);
 	res = calcula_pos_fixa(pos_fixa);
 	free(pos_fixa);
