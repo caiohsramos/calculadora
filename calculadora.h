@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+/*defines utilizados ao longo do programa.*/
 #define FALSE 0
 #define TRUE 1
 
@@ -15,13 +15,13 @@
 #define DIV 2
 #define SOM 3
 #define SUB 4
-
+/*codigo de erro para retorno de operacoes mal sucedidas.*/
 #define ERRO 9999
-
+/*typedefs das estruturas de dados utilizadas ao longo do programa.*/
 typedef struct pilha_ PILHA;
 typedef struct no_ NO;
 typedef struct item_ ITEM;
-
+/*escopo das funcoes que foram utilizadas ao longo do programa, tais funcoes serao explicadas posteriormente no arquivo .c.*/
 PILHA *criaPilha();
 int empilhar(PILHA *, ITEM);
 int desempilhar(PILHA *, ITEM *);

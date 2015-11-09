@@ -89,7 +89,7 @@ void topo(PILHA *p, ITEM *item) {
 }
 /*Funcao calculaResultado :
 
-	funcao responsavel por calcular o resultado da expressao dada via stdin.*/
+	funcao responsavel por calcular o resultado da expressao dada via stdin pela chamada das funcoes que auxiliarao no processo.*/
 float calculaResultado(char *expressao) {
 	char *pos_fixa = transforma_pos_fixa(expressao);
 	float res;
@@ -100,7 +100,7 @@ float calculaResultado(char *expressao) {
 }
 /*Funcao transforma_pos_fixa :
 
-	funcao..*/
+	funcao responsavel por transformar a expressao infixa dada via stdin para a forma posfixa da mesma para que sejam realizados os calculos posteriomente pela funcao calcula_pos_fixa.*/
 char *transforma_pos_fixa(char *expressao) {
 	char *pos_fixa = (char*)malloc(300*sizeof(char));
 	char val;
