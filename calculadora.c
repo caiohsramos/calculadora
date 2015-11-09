@@ -1,5 +1,5 @@
-/*	Caio Ramos		
-	Igor Martinelli		9006336*/
+/*	Caio Henrique Silva Ramos	9292991	
+	Igor Martinelli			9006336*/
 
 #include "calculadora.h"
 /*estruturas utilizadas para o calculo da notacao aritmetica.*/
