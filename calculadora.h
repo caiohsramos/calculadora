@@ -1,3 +1,5 @@
+/*	Caio Ramos		
+	Igor Martinelli		9006336*/
 #ifndef _CALCULADORA_H_
 #define _CALCULADORA_H_
 

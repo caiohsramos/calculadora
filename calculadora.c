@@ -1,5 +1,8 @@
-#include "calculadora.h"
+/*	Caio Ramos		
+	Igor Martinelli		9006336*/
 
+#include "calculadora.h"
+/*estruturas utilizadas para o calculo da notacao aritmetica.*/
 struct pilha_ {
 	NO *topo;
 	int tamanho;
@@ -14,7 +17,9 @@ struct no_ {
 	ITEM item; 
 	struct no_ *anterior;
 };
+/*Funcao criarPilha :
 
+	funcao responsavel por inicializar a estrutura de dados pilha.*/
 PILHA *criaPilha() {
 	
 	PILHA *pilha = (PILHA *) malloc(sizeof(PILHA));
@@ -26,7 +31,9 @@ PILHA *criaPilha() {
 	
 	return pilha;
 }
+/*Funcao empilhar :
 
+	funcao do TAD pilha responsavel por empilhar um item.*/
 int empilhar(PILHA *pilha, ITEM item) {
 	
 	NO *novoNo = (NO *) malloc(sizeof(NO));
@@ -40,7 +47,9 @@ int empilhar(PILHA *pilha, ITEM item) {
 	};
 	return FALSE;
 }
+/*Funcao desempilhar :
 
+	funcao do TAD pilha responsavel por desempilhar um item e retornar o mesmo.*/
 int desempilhar(PILHA *pilha, ITEM *item) {
 
 	NO *noAux = NULL;
@@ -58,22 +67,29 @@ int desempilhar(PILHA *pilha, ITEM *item) {
 	return FALSE;
 
 }
+/*Funcao vazia :
 
+	funcao responsavel por verificar se a pilha esta vazia ou nao.*/
 int vazia(PILHA *pilha) {
 	return(pilha->topo == NULL);
 }
+/*Funcao apaga_pilha :
 
-
+	funcao responsavel por apagar a estrutura de dados pilha.*/
 void apaga_pilha(PILHA **p) {
 	ITEM aux;
 	while(!vazia((*p))) desempilhar((*p), &aux);
 	free(*p);
 }
+/*Funcao topo :
 
+	funcao responsavel por tornar o item como o topo da pilha*/
 void topo(PILHA *p, ITEM *item) {
 	(*item) = p->topo->item;
 }
+/*Funcao calculaResultado :
 
+	funcao responsavel por calcular o resultado da expressao dada via stdin.*/
 float calculaResultado(char *expressao) {
 	char *pos_fixa = transforma_pos_fixa(expressao);
 	float res;
@@ -82,7 +98,9 @@ float calculaResultado(char *expressao) {
 	free(pos_fixa);
 	return res;
 }
+/*Funcao transforma_pos_fixa :
 
+	funcao..*/
 char *transforma_pos_fixa(char *expressao) {
 	char *pos_fixa = (char*)malloc(300*sizeof(char));
 	char val;
@@ -168,7 +186,9 @@ char *transforma_pos_fixa(char *expressao) {
 	apaga_pilha(&pilha);
 	return pos_fixa;
 }
+/*Funcao retornaOperacao :
 
+	funcao responsavel por retornar um inteiro identificador do operador.*/
 char retornaOperacao(char op) {
 	if(op == '*') return 1;
 	if(op == '/') return 2;
@@ -176,7 +196,9 @@ char retornaOperacao(char op) {
 	if(op == '-') return 4;
 	return 0;
 }
+/*Funcao calcula_pos_fixa :
 
+	funcao responsavel por calcular a expressao em notacao polonesa reversa, a funcao tem alguns lacos while para que os espacos e as tabulacoes sejam ignorados e utiliza uma pilha para o calculo da operacao, a mesma ira empilhar os numeros ate que uma operacao seja identificada, quando esta for, entao serao desempilhados os dois ultimos numeros empilhados e neles realizada a operacao, seguindo a ordem proposta via stdin.*/
 float calcula_pos_fixa(char *exp) {
 	
 	PILHA *pilha = criaPilha();
@@ -226,7 +248,9 @@ float calcula_pos_fixa(char *exp) {
 	return item.num; 
 
 }
+/*Funcao testeInvalida :
 
+	funcao responsavel por testar se uma expressao aritmetica eh invalida ou nao, tal funcao conta o numero de ( e de ), caso sejam iguais, esta eh valida, caso sejam diferentes, invalida.*/
 int testeInvalida(char *exp) {
 	int i, tam, esq = 0, dir = 0;
 	tam = strlen(exp);
@@ -237,4 +261,3 @@ int testeInvalida(char *exp) {
 	if(esq == dir) return 0;
 	return 1;
 }
-

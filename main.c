@@ -1,3 +1,5 @@
+/*	Caio Ramos		
+	Igor Martinelli		9006336*/
 #include "calculadora.h"
 
 int main(int argc, char *argv[]) {
